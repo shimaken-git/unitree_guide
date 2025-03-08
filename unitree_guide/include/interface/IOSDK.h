@@ -19,6 +19,9 @@ public:
 IOSDK();
 ~IOSDK(){}
 void sendRecv(const LowlevelCmd *cmd, LowlevelState *state);
+#ifdef COMPILE_WITH_MOVE_BASE
+void getGenesisCb(const std_msgs::Float32MultiArrayConstPtr& msg);
+#endif
 
 private:
 UNITREE_LEGGED_SDK::UDP _udp;
@@ -30,6 +33,8 @@ UNITREE_LEGGED_SDK::LowState _lowState;
     ros::NodeHandle _nh;
     ros::Publisher _pub;
     sensor_msgs::JointState _joint_state;
+    sensor_msgs::Imu _imu;
+    std::vector<float> genesis_angles;
 #endif  // COMPILE_WITH_MOVE_BASE
 };
 

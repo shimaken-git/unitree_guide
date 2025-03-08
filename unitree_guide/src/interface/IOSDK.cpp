@@ -5,6 +5,7 @@
 
 #include "interface/IOSDK.h"
 #include "interface/WirelessHandle.h"
+// #include "interface/KeyBoard.h"
 #include <stdio.h>
 
 #ifdef ROBOT_TYPE_Go1
@@ -51,6 +52,7 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
     }
     
     _udp.SetSend(_lowCmd);
+    _udp.SetSend((char *)"[encryptCRC]");
     _udp.Send();
 
     _udp.Recv();
@@ -91,4 +93,11 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
 #endif  // COMPILE_WITH_MOVE_BASE
 }
 
+#ifdef COMPILE_WITH_MOVE_BASE
+
+#endif  // COMPILE_WITH_MOVE_BASE
+void IOSDK::getGenesisCb(const std_msgs::Float32MultiArrayConstPtr& msg)
+{
+    genesis_angles = msg->data;
+}
 #endif  // COMPILE_WITH_REAL_ROBOT
