@@ -41,6 +41,9 @@ FSMStateName State_FixedStand::checkChange(){
     if(_lowState->userCmd == UserCommand::L2_B){
         return FSMStateName::PASSIVE;
     }
+    else if(_lowState->userCmd == UserCommand::L1_A){
+        return FSMStateName::SITDOWN;
+    }
     else if(_lowState->userCmd == UserCommand::L2_X){
         return FSMStateName::FREESTAND;
     }
@@ -50,17 +53,20 @@ FSMStateName State_FixedStand::checkChange(){
     else if(_lowState->userCmd == UserCommand::L1_X){
         return FSMStateName::BALANCETEST;
     }
-    else if(_lowState->userCmd == UserCommand::L1_A){
-        return FSMStateName::SWINGTEST;
-    }
+    // else if(_lowState->userCmd == UserCommand::L1_A){
+    //     return FSMStateName::SWINGTEST;
+    // }
     else if(_lowState->userCmd == UserCommand::L1_Y){
         return FSMStateName::STEPTEST;
     }
-#ifdef COMPILE_WITH_MOVE_BASE
     else if(_lowState->userCmd == UserCommand::L2_Y){
-        return FSMStateName::MOVE_BASE;
+        return FSMStateName::GENESISLINK;
     }
-#endif  // COMPILE_WITH_MOVE_BASE
+// #ifdef COMPILE_WITH_MOVE_BASE
+//     else if(_lowState->userCmd == UserCommand::L2_Y){
+//         return FSMStateName::MOVE_BASE;
+//     }
+// #endif  // COMPILE_WITH_MOVE_BASE
     else{
         return FSMStateName::FIXEDSTAND;
     }

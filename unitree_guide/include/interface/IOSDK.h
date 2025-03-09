@@ -11,6 +11,8 @@
     #include <ros/ros.h>
     #include <ros/time.h>
     #include <sensor_msgs/JointState.h>
+    #include <sensor_msgs/Imu.h>
+    #include <std_msgs/Float32MultiArray.h>
 #endif  // COMPILE_WITH_MOVE_BASE
 
 
@@ -32,9 +34,10 @@ UNITREE_LEGGED_SDK::LowState _lowState;
 #ifdef COMPILE_WITH_MOVE_BASE
     ros::NodeHandle _nh;
     ros::Publisher _pub;
+    ros::Publisher _imu_pub;
     sensor_msgs::JointState _joint_state;
     sensor_msgs::Imu _imu;
-    std::vector<float> genesis_angles;
+    std::vector<float> _genesisAction;
 #endif  // COMPILE_WITH_MOVE_BASE
 };
 

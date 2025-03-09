@@ -16,6 +16,7 @@ IOSDK::IOSDK():_safe(UNITREE_LEGGED_SDK::LeggedType::Aliengo), _udp(UNITREE_LEGG
 
 #ifdef COMPILE_WITH_MOVE_BASE
     _pub = _nh.advertise<sensor_msgs::JointState>("/realRobot/joint_states", 20);
+    _imu_pub = _nh.advertise<sensor_msgs::Imu>("/realRobot/imu", 20);
     _joint_state.name.resize(12);
     _joint_state.position.resize(12);
     _joint_state.velocity.resize(12);
@@ -90,6 +91,22 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
     }
 
     _pub.publish(_joint_state);
+
+    _imu.header.stamp = ros::Time::now();
+    _imu.orientation.x = state->imu.quaternion[0];
+    _imu.orientation.y = state->imu.quaternion[1];
+    _imu.orientation.z = state->imu.quaternion[2];
+    _imu.orientation.w = state->imu.quaternion[3];
+    _imu.angular_velocity.x = state->imu.gyroscope[0];
+    _imu.angular_velocity.y = state->imu.gyroscope[1];
+    _imu.angular_velocity.z = state->imu.gyroscope[2];
+    _imu.linear_acceleration.x = state->imu.accelerometer[0];
+    _imu.linear_acceleration.y = state->imu.accelerometer[1];
+    _imu.linear_acceleration.z = state->imu.accelerometer[2];
+    _imu_pub.publish(_imu);
+
+    state->genesisAction = _genesisAction;
+
 #endif  // COMPILE_WITH_MOVE_BASE
 }
 
@@ -98,6 +115,6 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
 #endif  // COMPILE_WITH_MOVE_BASE
 void IOSDK::getGenesisCb(const std_msgs::Float32MultiArrayConstPtr& msg)
 {
-    genesis_angles = msg->data;
+    _genesisAction = msg->data;
 }
 #endif  // COMPILE_WITH_REAL_ROBOT
