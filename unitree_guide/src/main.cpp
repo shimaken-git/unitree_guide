@@ -47,9 +47,9 @@ int main(int argc, char **argv)
     /* set the print format */
     std::cout << std::fixed << std::setprecision(3);
 
-#ifdef RUN_ROS
+// #ifdef RUN_ROS
     ros::init(argc, argv, "unitree_gazebo_servo");
-#endif // RUN_ROS
+// #endif // RUN_ROS
 
     IOInterface *ioInter;
     CtrlPlatform ctrlPlat;

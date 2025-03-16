@@ -31,12 +31,12 @@ void WirelessHandle::receiveHandle(UNITREE_LEGGED_SDK::LowState *lowState){
         userCmd = UserCommand::L2_X;
     }
 
-#ifdef COMPILE_WITH_MOVE_BASE
+// #ifdef COMPILE_WITH_MOVE_BASE
     else if(((int)_keyData.btn.components.L2 == 1) && 
             ((int)_keyData.btn.components.Y  == 1)){
         userCmd = UserCommand::L2_Y;
     }
-#endif  // COMPILE_WITH_MOVE_BASE
+// #endif  // COMPILE_WITH_MOVE_BASE
 
     else if(((int)_keyData.btn.components.L1 == 1) && 
             ((int)_keyData.btn.components.X  == 1)){

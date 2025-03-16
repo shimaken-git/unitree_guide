@@ -14,14 +14,14 @@ IOSDK::IOSDK():_safe(UNITREE_LEGGED_SDK::LeggedType::Aliengo), _udp(UNITREE_LEGG
     _udp.InitCmdData(_lowCmd);
     cmdPanel = new WirelessHandle();
 
-#ifdef COMPILE_WITH_MOVE_BASE
+// #ifdef COMPILE_WITH_MOVE_BASE
     _pub = _nh.advertise<sensor_msgs::JointState>("/realRobot/joint_states", 20);
     _imu_pub = _nh.advertise<sensor_msgs::Imu>("/realRobot/imu", 20);
     _joint_state.name.resize(12);
     _joint_state.position.resize(12);
     _joint_state.velocity.resize(12);
     _joint_state.effort.resize(12);
-#endif  // COMPILE_WITH_MOVE_BASE
+// #endif  // COMPILE_WITH_MOVE_BASE
 }
 #endif
 
@@ -78,7 +78,7 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
     state->userCmd = cmdPanel->getUserCmd();
     state->userValue = cmdPanel->getUserValue();
 
-#ifdef COMPILE_WITH_MOVE_BASE
+// #ifdef COMPILE_WITH_MOVE_BASE
     _joint_state.header.stamp = ros::Time::now();
     _joint_state.name = {"FR_hip_joint", "FR_thigh_joint", "FR_calf_joint", 
                          "FL_hip_joint", "FL_thigh_joint", "FL_calf_joint",  
@@ -107,12 +107,9 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
 
     state->genesisAction = _genesisAction;
 
-#endif  // COMPILE_WITH_MOVE_BASE
+// #endif  // COMPILE_WITH_MOVE_BASE
 }
 
-#ifdef COMPILE_WITH_MOVE_BASE
-
-#endif  // COMPILE_WITH_MOVE_BASE
 void IOSDK::getGenesisCb(const std_msgs::Float32MultiArrayConstPtr& msg)
 {
     _genesisAction = msg->data;

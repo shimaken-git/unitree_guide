@@ -28,8 +28,8 @@ void State_GenesisLink::enter(){
 void State_GenesisLink::run(){
     if(true){
         for(int j=0; j<12; j++){
-            // std::cout << "genesisAction[" << j << "] = " << _lowState->genesisAction[j] << std::endl;
-            _lowCmd->motorCmd[j].q = _lowState->genesisAction[j];
+            std::cout << "genesisAction[" << j << "] = " << _lowState->genesisAction[j] << std::endl;
+            // _lowCmd->motorCmd[j].q = _lowState->genesisAction[j];
         }
     }
 }
@@ -45,11 +45,11 @@ FSMStateName State_GenesisLink::checkChange(){
     else if(_lowState->userCmd == UserCommand::L2_A){
         return FSMStateName::FIXEDSTAND;
     }
-// #ifdef COMPILE_WITH_MOVE_BASE
-//     else if(_lowState->userCmd == UserCommand::L2_Y){
-//         return FSMStateName::MOVE_BASE;
-//     }
-// #endif  // COMPILE_WITH_MOVE_BASE
+#ifdef COMPILE_WITH_MOVE_BASE
+    else if(_lowState->userCmd == UserCommand::L2_Y){
+        return FSMStateName::MOVE_BASE;
+    }
+#endif  // COMPILE_WITH_MOVE_BASE
     else{
         return FSMStateName::GENESISLINK;
     }

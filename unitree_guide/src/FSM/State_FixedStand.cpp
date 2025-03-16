@@ -62,11 +62,11 @@ FSMStateName State_FixedStand::checkChange(){
     else if(_lowState->userCmd == UserCommand::L2_Y){
         return FSMStateName::GENESISLINK;
     }
-// #ifdef COMPILE_WITH_MOVE_BASE
-//     else if(_lowState->userCmd == UserCommand::L2_Y){
-//         return FSMStateName::MOVE_BASE;
-//     }
-// #endif  // COMPILE_WITH_MOVE_BASE
+#ifdef COMPILE_WITH_MOVE_BASE
+    else if(_lowState->userCmd == UserCommand::L2_Y){
+        return FSMStateName::MOVE_BASE;
+    }
+#endif  // COMPILE_WITH_MOVE_BASE
     else{
         return FSMStateName::FIXEDSTAND;
     }

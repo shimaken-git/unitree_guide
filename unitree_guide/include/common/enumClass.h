@@ -24,9 +24,9 @@ enum class UserCommand{
     L2_A,       // fixedStand
     L2_B,       // passive
     L2_X,       // freeStand
-#ifdef COMPILE_WITH_MOVE_BASE
+// #ifdef COMPILE_WITH_MOVE_BASE
     L2_Y,       // move_base
-#endif  // COMPILE_WITH_MOVE_BASE
+// #endif  // COMPILE_WITH_MOVE_BASE
     L1_X,       // balanceTest
     L1_A,       // swingTest
     L1_Y,       // stepTest
