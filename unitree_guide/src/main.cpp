@@ -91,7 +91,9 @@ int main(int argc, char **argv)
     while (running)
     {
         ctrlFrame.run();
+        ros::spinOnce();
     }
+    ros::shutdown();
 
     delete ctrlComp;
     return 0;

@@ -17,6 +17,7 @@ IOSDK::IOSDK():_safe(UNITREE_LEGGED_SDK::LeggedType::Aliengo), _udp(UNITREE_LEGG
 // #ifdef COMPILE_WITH_MOVE_BASE
     _pub = _nh.advertise<sensor_msgs::JointState>("/realRobot/joint_states", 20);
     _imu_pub = _nh.advertise<sensor_msgs::Imu>("/realRobot/imu", 20);
+    _sub = _nh.subscribe("/genesis_angles", 10, &IOSDK::getGenesisCb, this);
     _joint_state.name.resize(12);
     _joint_state.position.resize(12);
     _joint_state.velocity.resize(12);

@@ -33,6 +33,7 @@ UNITREE_LEGGED_SDK::LowState _lowState;
     ros::NodeHandle _nh;
     ros::Publisher _pub;
     ros::Publisher _imu_pub;
+    ros::Subscriber _sub;
     sensor_msgs::JointState _joint_state;
     sensor_msgs::Imu _imu;
     std::vector<float> _genesisAction;
