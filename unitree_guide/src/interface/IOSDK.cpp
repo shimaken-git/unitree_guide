@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 #ifdef ROBOT_TYPE_Go1
-IOSDK::IOSDK():_safe(UNITREE_LEGGED_SDK::LeggedType::Aliengo), _udp(UNITREE_LEGGED_SDK::LOWLEVEL, 8090, "192.168.123.10", 8007){
+IOSDK::IOSDK():_safe(UNITREE_LEGGED_SDK::LeggedType::Aliengo), _udp(UNITREE_LEGGED_SDK::LOWLEVEL, 8090, "192.168.123.10", 8007), _updateAction(false){
     std::cout << "The control interface for real robot" << std::endl;
     _udp.InitCmdData(_lowCmd);
     cmdPanel = new WirelessHandle();
@@ -106,7 +106,11 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
     _imu.linear_acceleration.z = state->imu.accelerometer[2];
     _imu_pub.publish(_imu);
 
-    state->genesisAction = _genesisAction;
+    if(_updateAction){
+        state->genesisAction = _genesisAction;
+        _updateAction = false;
+        state->updateAction = true;
+    }
 
 // #endif  // COMPILE_WITH_MOVE_BASE
 }
@@ -114,5 +118,6 @@ void IOSDK::sendRecv(const LowlevelCmd *cmd, LowlevelState *state){
 void IOSDK::getGenesisCb(const std_msgs::Float32MultiArrayConstPtr& msg)
 {
     _genesisAction = msg->data;
+    _updateAction = true;
 }
 #endif  // COMPILE_WITH_REAL_ROBOT

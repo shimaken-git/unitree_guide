@@ -37,6 +37,7 @@ UNITREE_LEGGED_SDK::LowState _lowState;
     sensor_msgs::JointState _joint_state;
     sensor_msgs::Imu _imu;
     std::vector<float> _genesisAction;
+    bool _updateAction;
 // #endif  // COMPILE_WITH_MOVE_BASE
 };
 

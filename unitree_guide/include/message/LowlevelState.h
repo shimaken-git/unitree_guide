@@ -68,10 +68,11 @@ struct IMU
 
 struct LowlevelState
 {
-    LowlevelState(): genesisAction(12){};
+    LowlevelState(): genesisAction(12), updateAction(false){};
     IMU imu;
     MotorState motorState[12];
     std::vector<float> genesisAction;
+    bool updateAction;
     UserCommand userCmd;
     UserValue userValue;
 

@@ -26,10 +26,11 @@ void State_GenesisLink::enter(){
 }
 
 void State_GenesisLink::run(){
-    if(true){
+    if(_lowState->updateAction){
+        _lowState->updateAction = false;
         for(int j=0; j<12; j++){
             std::cout << "genesisAction[" << j << "] = " << _lowState->genesisAction[j] << std::endl;
-            // _lowCmd->motorCmd[j].q = _lowState->genesisAction[j];
+            _lowCmd->motorCmd[j].q = _lowState->genesisAction[j];
         }
     }
 }
