@@ -93,6 +93,17 @@ struct LowlevelCmd{
         motorCmd[legID*3+2].Kp = 80;
         motorCmd[legID*3+2].Kd = 7;
     }
+    void setGenesisLinkGain(int legID){
+        motorCmd[legID*3+0].mode = 10;
+        motorCmd[legID*3+0].Kp = 30;
+        motorCmd[legID*3+0].Kd = 5;
+        motorCmd[legID*3+1].mode = 10;
+        motorCmd[legID*3+1].Kp = 30;
+        motorCmd[legID*3+1].Kd = 4;
+        motorCmd[legID*3+2].mode = 10;
+        motorCmd[legID*3+2].Kp = 30;
+        motorCmd[legID*3+2].Kd = 7;
+    }
     void setZeroGain(int legID){
         motorCmd[legID*3+0].mode = 10;
         motorCmd[legID*3+0].Kp = 0;

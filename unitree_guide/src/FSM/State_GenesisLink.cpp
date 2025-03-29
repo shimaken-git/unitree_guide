@@ -13,7 +13,7 @@ void State_GenesisLink::enter(){
             _lowCmd->setSimStanceGain(i);
         }
         else if(_ctrlComp->ctrlPlatform == CtrlPlatform::REALROBOT){
-            _lowCmd->setRealStanceGain(i);
+            _lowCmd->setGenesisLinkGain(i);
         }
         _lowCmd->setZeroDq(i);
         _lowCmd->setZeroTau(i);
